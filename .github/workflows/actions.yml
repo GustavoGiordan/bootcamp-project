@@ -6,8 +6,8 @@ on:
       - main
       
 jobs:
-  root:
-    name: 'Terraform (root)'
+  init:
+    name: 'Terraform (init)'
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
@@ -21,6 +21,44 @@ jobs:
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          AWS_ACCESS_KEY_ID:  'ASIAYKCI44YTKK5YTFKF'
-          AWS_SECRET_ACCESS_KEY:  'pxmsai7VbbpEZxqOzxUx1eMrCj+99u9K4mGBJwaC'
-          AWS_SESSION_TOKEN: 'FwoGZXIvYXdzEND//////////wEaDCgjw9wWWDh9s+gJqiLeAYMNWKc2mJiDgLC73qb7fFTzDCEZ6eH4D1ScxbEiL23QRw3PfQEBKHyjIwfzw5bcQgXPKU+PU6j7RXXBpPqD/spMbMTk69iVlrF1WMxdWNzDBBthrNUFU5rODU7e526pKmeYMQDiBu5265ktJqnGHtNGLJNFwZx0Ef2uaphtfSuWwts3q/QkxDha4jbNIzEyeP7vd3VTDLTA3Q6VZEyh2i/RWUt5mHepnzweBzQRlRqFKGR85CuTtZik6lryvMLQHSrjclOPYPIb9qWMxEQ7gMBu6EY/I2BipEq3Y7hayCjv1bKcBjIt511ouOxWifvjbTz5B5BVXX7Fa/ahwBy3SZDqrepWNnNMcSdZKe3oM71xjtUr'
+          AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+  plan:
+    name: 'Terraform (plan)'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Terraform Plan'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.13.1
+          tf_actions_subcommand: 'plan'
+          tf_actions_working_dir: '.'
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+  apply:
+    name: 'Terraform (apply)'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@master
+      - name: 'Terraform Plan'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 0.13.1
+          tf_actions_subcommand: 'apply'
+          tf_actions_working_dir: '.'
+          tf_actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+
+
