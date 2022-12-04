@@ -1,7 +1,7 @@
 module "vpc" {
     source = "terraform-aws-modules/vpc/aws"
 
-    name = "projeto-terraform-bootcamp"
+    name = "projeto-terraform-boot"
     cidr = "10.0.0.0/16"
 
     azs             = ["us-east-1a", "us-east-1b"]
@@ -15,7 +15,7 @@ module "vpc" {
     tags = {
         Terraform = "true"
         Environment = "dev"
-        Name = "projeto-terraform-bootcamp"
+        Name = "projeto-terraform-boot"
         CC = "12345"
     }
 }
