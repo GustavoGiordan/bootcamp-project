@@ -26,6 +26,7 @@ jobs:
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
   plan:
     name: 'Terraform (plan)'
+    needs: init
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
@@ -44,6 +45,7 @@ jobs:
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
   apply:
     name: 'Terraform (apply)'
+    needs: plan
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout'
